@@ -1,0 +1,14 @@
+/* Portfolio Items */
+.portfolio-item {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  max-width: 300px; /* Atur ukuran maksimum sesuai kebutuhan */
+}
+
+.portfolio-item img {
+  width: 100%; /* Pastikan gambar menyesuaikan dengan ukuran elemen */
+}
+
+.portfolio-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
