@@ -4,686 +4,850 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio React</title>
+    <title>Restu Firmansyah | Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React dan ReactDOM -->
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <!-- Babel untuk JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+3o5p6B5p4UibX39p1w5nQ9Kf3z4F"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            600: '#0284c7',
+                            800: '#075985',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
     </script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lightbox CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #075985 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dark .nav-link::after {
+            background-color: #0284c7;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+            
+            .mobile-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: #075985;
+                padding: 1rem;
+                z-index: 10;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+        }
+    </style>
 </head>
 
-
-<body class="bg-gray-100">
-    <!-- Root Element -->
-    <div id="root"></div>
-
-    <!-- React Code -->
-    <script type="text/babel">
-        const App = () => {
-        return (
-            <div className="min-h-screen bg-white dark:bg-gray-900 dark:text-white">
-              <header className="bg-blue-600 dark:bg-blue-800 text-white p-4">
-                <div className="container mx-auto flex justify-between items-center">
-                  <h1 className="text-3xl font-bold">MY PORTFOLIO</h1>
-
-                </div>
-              </header>
-              <main className="container mx-auto p-4">
-                <section id="home" className="my-8">
-                  <div className="text-center">
-                    <img src="pplinkedin.jpg" width="200" height="200" alt="Data analyst"
-                      className="mx-auto rounded-full" />
-                    <h2 className="text-3xl font-bold mt-4">Restu Firmansyah</h2>
-                    <p className="text-xl">Data Analyst, Data Scientist, Full-Stack Web, Database
-                      Administrator</p>
-                    <p className="mt-4">Passionate about turning data into actionable insights.</p>
-                    <div className="ml-4 flex justify-center items-center">
-                      <a href="https://drive.google.com/file/d/1rSTCGFPVcU6hzVhs66uzJNPtvra-JKlP/view?usp=sharing"
-                        target="_blank" className="text-blue-600 hover:underline"> My
-                        Resume</a><span className="mx-3 text-gray-600">|</span> {/* Separator
-                      dengan
-                      warna
-                      abu-abu */}
-                      <div className="ml-2"> {/* Menambahkan margin-left untuk jarak */}
-                        <a href="https://wa.me/6282120605121" target="_blank"
-                          className="text-blue-600 hover:underline">My WhatsApp</a>
-                        <span className="mx-3 text-gray-600">|</span> {/* Separator dengan warna
-                        abu-abu */}
-                        <a href="
-                           https://mail.google.com/mail/?view=cm&fs=1&to=restufirmansyh22@gmail.com"
-                          className="text-blue-600 hover:underline">My Gmail</a>
-
-                      </div>
-                    </div>
-                  </div>
-                </section>
-                <section id="about" className="my-8">
-                  <h2 className="text-3xl font-bold">ABOUT ME</h2>
-                  <p className="mt-4">A sixth-semester Informatics Engineering student at Telkom University’s Purwokerto, with a GPA of 3.69. Demonstrates strong leadership, team 
-management, and problem-solving skills through active organizational roles. Also engages in investment and business, focusing on capital market 
-trends. Specializing in Back-end Engineering, Data Analysis, Data Science, and Database Management, with hands-on experience in machine 
-learning, data visualization, and full-stack web development. Skilled in SQL, Python, Excel, Tableau, and web development technologies like 
-JavaScript, React, and Node.js. Enthusiastic about leveraging data-driven insights and technical expertise to create impactful solutions in 
-technology and business. t</p>
-                  <section id="skills" className="my-8">
-                    <h2 className="text-3xl font-bold mb-8">SKILLSET</h2>
-                    <div className="flex flex-wrap justify-center gap-6">
-                      <img alt="Excel logo" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=117561&amp;format=png&amp;color=000000" />
-                      <img alt="SQL logo" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=13406&amp;format=png&amp;color=000000" />
-                      <img alt="Python logo" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=13441&amp;format=png&amp;color=000000" />
-                      <img alt="Tableau logo" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=9Kvi1p1F0tUo&amp;format=png&amp;color=000000" />
-                      <img alt="JavaScript" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=108784&amp;format=png&amp;color=000000" />
-                      <img alt="React Native" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=123603&amp;format=png&amp;color=000000" />
-                      <img alt="Node JS" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=hsPbhkOH4FMe&amp;format=png&amp;color=000000" />
-                      <img alt="Express JS" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=PZQVBAxaueDJ&amp;format=png&amp;color=000000" />
-                      <img alt="API" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=21894&amp;format=png&amp;color=000000" />
-                      <img alt="HTML" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=20909&amp;format=png&amp;color=000000" />
-                      <img alt="CSS" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=7gdY5qNXaKC0&amp;format=png&amp;color=000000" />
-                      <img alt="FIGMA" className="w-20 h-20 transition-transform transform hover:scale-110"
-                        src="https://img.icons8.com/?size=100&amp;id=zfHRZ6i1Wg0U&amp;format=png&amp;color=000000" />
-                    </div>
-                    <br></br>
-                    <div className="mt-4">
-                      <h3 className="text-3xl font-bold">Technical Skills</h3>
-                      <div className="mt-2">
-                        <p><strong>Data Analyst: SQL, Python, Excel, Tableau.</strong> Skilled in
-                          with foundational knowledge
-                          capabilities including
-                          data extraction, cleaning, and preprocessing; performing basic data
-                          analysis; creating visualizations to illustrate findings, and
-                          generating
-                          reports. Committed to learning and applying data analysis best
-                          practices to ensure accuracy and actionable insights..</p>
-                      </div>
-                      <div className="mt-2">
-                        <p><strong>Data scientist: SQL, Python, Excel,
-                            Tableau.</strong> with solid expertise in data
-                          analysis, statistical methods, and foundational machine learning
-                          techniques. Capabilities include data extraction, cleaning,
-                          preprocessing, and analyzing datasets to identify trends and
-                          generate insights.
-
-                          Skilled in applying supervised and unsupervised learning methods
-                          for predictive analysis using libraries like Pandas, NumPy, and
-                          scikit-learn. Experienced in creating dashboards and visualizations
-                          to effectively communicate findings and enable data-driven
-                          decision-making.</p>
-                      </div>
-                      <div className="mt-2">
-                        <p><strong>Full-Stack Web Development: JavaScript, React, Node.js, Express.js,
-                            API, HTML, CSS. </strong>Proficient in building both the
-                          frontend and backend of
-                          web applications using technologies such as JavaScript, React,
-                          Node.js, and Express.js.
-
-                          Capabilities include designing and implementing interactive user
-                          interfaces, creating responsive web designs, and ensuring
-                          cross-browser compatibility on the frontend. On the backend,
-                          experienced in developing server-side logic, managing databases
-                          (MySQL), and integrating APIs to bridge frontend and
-                          backend functionality.
-
-                          Skilled in end-to-end application development, debugging, and
-                          optimizing performance for scalable and efficient web solutions.
-                          Committed to adopting industry best practices for security,
-                          maintainability, and collaboration in fullstack development
-                          workflows.</p>
-                      </div>
-                      <div className="mt-2">
-                        <p><strong>Design UI/UX:FIGMA.</strong> Beginner-level proficiency in
-                          Figma, with the ability to create simple wireframes, low-fidelity
-                          prototypes, and basic UI designs. Capabilities include understanding
-                          design principles such as layout, typography, and color theory to
-                          produce visually appealing and functional designs.
-
-                          Familiar with Figma's interface and tools for collaboration,
-                          including commenting and sharing designs with team members.
-                        </p>
-                      </div>
-
-                    </div>
-                  </section>
-
-                </section>
-               <section class="portfolio-section" id="portfolio">
-                 
-                  <h3 className="text-4xl font-bold">PORTFOLIO PROJECTS</h3>
-                  <br></br>
-                   <h2 className="text-2xl font-bold">PROJECTS DATA ANALYST WITH PYTHON</h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                    <div
-                      className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                      <div className="grid grid-cols-1 gap-4">
-                        <div
-                          className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-                          
-
-                          {/* Content */}
-                          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">
-                            Data Analyst - Python-based EDA of Amazon Sales Data
-                          </h3>
-                          <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                            An in-depth exploratory analysis of the product sales dataset on Amazon. The main objective
-                            of this analysis is to uncover patterns, trends, and valuable insights that can help
-                            understand customer behavior, product performance, and market dynamics on the Amazon
-                            platform.
-                          </p>
-                          <a href="p1.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                              <img src="p1.png" alt="Screenshot of Project 1 dashboard"
-                                  className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                          </a>
-
-                          <a href="https://github.com/FirmanRcode/Data-Analyst_EDA-Dataset-Penjualan-Amazon-dengan-Python"
-                            target="_blank" rel="noopener noreferrer"
-                            className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm hover:underline">
-                            View on GitHub
-                          </a>
-
-                         
-                        </div>
-                      </div>
-                    </div>
-
-
-                    
-                      <div
-                        className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                        <div className="grid grid-cols-1 gap-4">
-                          <div
-                            className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-                            
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Python Exploratory
-                        Data Analysis of 40 Years
-                        of EDA Music Sales on Dataset</h3>
-                      <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">This project analyzes
-                        the dataset '40 Years of Music
-                        Industry Sales' to uncover trends in music sales over time. The analysis
-                        includes descriptive statistics of sales based on music format and metrics
-                        such as units sold, actual value, and inflation-adjusted value, as well as
-                        interactive visualizations like line charts and bar charts to observe
-                        changes.</p>
-                     <a href="p2.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                         <img src="p2.png" alt="Screenshot of Project 1 dashboard"
-                             className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                     </a>
-                      <a href="https://github.com/FirmanRcode/Exploratory-Data_Analysis-40-Tahun-Penjualan-Musik-EDA-pada-Dataset-.git"
-                        target="_blank" rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on GitHub</a>
-                       
-                        </div>
-                        </div>
-                        </div>
-                    
-                        <div
-                            className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                            <div className="grid grid-cols-1 gap-4">
-                                <div
-                                    className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-                              
-                          
-                             <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Mapping Global
-                                 Layoff Trends with
-                              SQL, Python, Excel Techniques</h3>
-                            <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">This project
-                                analyzes global layoff data using SQL, Python,
-                              and Excel to uncover trends, patterns, and insights into workforce
-                              reductions across industries and regions. The goal is to provide a
-                              data-driven perspective on layoffs to help stakeholders understand economic
-                              and industry dynamics.</p>
-                         <a href="p6.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                             <img src="p6.png" alt="Screenshot of Project 1 dashboard"
-                                 className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                         </a>
-                            <a href="https://github.com/FirmanRcode/DataAnalyst_dataset-world_layoffs" target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm hover:underline">View
-                                on GitHub</a>
-                          </div>
-                          
-                          </div>
-                          </div>
-                          
-
-
-                    
-                      
-                            <div
-                                className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                                <div className="grid grid-cols-1 gap-4">
-                                    <div
-                                        className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-                            
-
-                             {/* Content */}
-                             <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">
-                     Dashboard Tableau- Analyst_Netflix</h3>
-                     <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                        This project involves
-                         creating an interactive Tableau
-                        dashboard to analyze Netflix's content library and user engagement trends.
-                        The dashboard provides insights into the distribution of movies and TV shows
-                        by genre, release year, and content ratings. It also includes visualizations
-                        showcasing the geographic distribution of Netflix's offerings and key
-                        metrics, such as average runtime and popularity trends</p>
-                     <a href="p3.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                         <img src="p3.png" alt="Screenshot of Project 1 dashboard"
-                             className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                     </a>
-                      
-                      <a href="https://public.tableau.com/app/profile/restu.firmansyah/viz/EDA_DASHBOARD-Netflix/Netflix"
-                        target="_blank"rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Tableau</a>
-                    
-              
-                 
-                     </div>
-                     </div>
-                     </div>
-
-                    
-                     <div
-                         className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                         <div className="grid grid-cols-1 gap-4">
-                             <div
-                                 className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Excel- Project Coffee
-                          Sales Main</h3>
-                      <p className="mt-2 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">This project focuses
-                          on analyzing coffee sales data using
-                        Microsoft Excel to create an interactive and visually appealing sales
-                        dashboard. The analysis includes tracking sales performance, revenue trends,
-                        and identifying key metrics for decision-making. Key features of the project
-                        include data cleaning to ensure accuracy and consistency of the raw sales
-                        data; summarizing key metrics such as total sales, profit margins, and
-                        top-selling products; creating a dynamic interactive dashboard with visuals
-                        using pivot tables, charts, and slicers that allow filtering by date,
-                        product category, and region; and highlighting monthly sales trends and
-                        seasonality to identify peak performance periods.</p>
-                    <a href="p5.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                        <img src="p5.png" alt="Screenshot of Project 1 dashboard"
-                            className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                    </a>
-                      <a href="https://docs.google.com/spreadsheets/d/1sTcCvEz8foKKOB-PUwJMFvGy89YUdNLa/edit?usp=sharing&ouid=116189486222315940694&rtpof=true&sd=true"
-                        target="_blank" rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Excel</a>
-                    </div>
-                    </div>
-                    </div>
-                  
-
-
-                   <div
-                       className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                       <div className="grid grid-cols-1 gap-4">
-                           <div
-                               className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-
-                               {/* Content */}
-                     <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4"> Excel-EDA_Vrinda Store Data</h3>
-                      <p className="mt-2 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">This project involves
-                          conducting Exploratory Data Analysis
-                        (EDA) on Vrinda Store's sales data using Microsoft Excel to uncover trends
-                        and actionable insights for optimizing sales performance. Key features
-                        include cleaning raw sales data for accuracy, identifying top-performing
-                        products and customer segments, analyzing sales trends for seasonality,
-                        evaluating profit margins across product categories and regions, and
-                        developing dynamic dashboards with pivot tables and visual charts to
-                        summarize key metrics like revenue and profit.</p>
-                    <a href="p7.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                        <img src="p7.png" alt="Screenshot of Project 1 dashboard"
-                            className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                    </a>
-                      <a href="https://docs.google.com/spreadsheets/d/10kxjEpIeVrsn1Upfuc0YwRKcfBRLRVwe/edit?usp=sharing&ouid=116189486222315940694&rtpof=true&sd=true"
-                        target="_blank"rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Excel</a>
-                    </div>
-                    </div>
-                    </div>
-
-
-                    <div
-                        className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                        <div className="grid grid-cols-1 gap-4">
-                            <div
-                                className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">EDA Python,
-                                    Excel_Dataset-Cryotherapy</h3>
-                      <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">The Cryotherapy
-                          dataset is used to predict the outcomes of
-                        cryotherapy treatments based on several patient features or attributes.
-                        Cryotherapy is a medical treatment method that uses cold temperatures to
-                        remove warts and other skin lesions. In this dataset, each row represents
-                        data from a single patient undergoing cryotherapy.
-
-                        The dataset contains variables such as age, time, treated area, number of
-                        warts, sex, and treatment outcome. This data is important for analyzing the
-                        relationships between these factors and the effectiveness of cryotherapy in
-                        treating warts, providing insights into how well this method works across
-                        different age groups, genders, and sizes of the treated areas.</p>
-                   <a href="p8.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                       <img src="p8.png" alt="Screenshot of Project 1 dashboard"
-                           className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                   </a>
-                      <a href="https://drive.google.com/file/d/1iEnkLs6c4WleRLTiMpYUV2vkv27Iq7ho/view?usp=drive_link"
-                        target="_blank"rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Drive</a>
-                    </div>
-                    </div>
-                    </div>
-
-
-
-
-                     <div
-                         className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                         <div className="grid grid-cols-1 gap-4">
-                             <div
-                                 className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4"> Project
-                                     for
-                                     Data Science: Retail Sales Analysis and Prediction Using Machine Learning
-                                     Techniques
-                                 </h3>
-                                 <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">Developed
-                                     a
-                                     comprehensive data science project analyzing retail sales data using Python and
-                                     machine
-                                     learning techniques. Focused on building predictive models with Random Forest
-                                     Regression and
-                                     XGBoost to achieve a high R² score of 95%, accurately forecasting sales trends.
-                                     Conducted data
-                                     extraction, cleaning, and preprocessing to ensure 100% data integrity. Applied
-                                     K-Means
-                                     Clustering for store segmentation, identifying three distinct clusters based on
-                                     size,
-                                     location, and customer satisfaction. Generated over eight visualizations using
-                                     Matplotlib to
-                                     present findings effectively. Delivered actionable insights and recommendations for
-                                     targeted
-                                     marketing strategies.</p>
-                                 <a href="ml.png" data-lightbox="portfolio"
-                                     data-title="Screenshot of Project 1 Dashboard">
-                                     <img src="ml.png" alt="Screenshot of Project 1 dashboard"
-                                         className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                                 </a>
-                                 <a href="https://github.com/FirmanRcode/Sales-Prediction-ML/tree/main"
-                                     target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on GitHub</a>
-                             </div>
-                         </div>
-                     </div>
-
-
-                     <div
-                         className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                         <div className="grid grid-cols-1 gap-4">
-                             <div
-                                 className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Final Project: Full-Stack Web Development for Employee Management System
-                                 </h3>
-                                 <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                                     Developed an Employee Management System to streamline employee data management as
-                                     part of the Software Implementation and Testing course. The project involved
-                                     designing and implementing a full-stack web application using Node.js and
-                                     Express.js for the back-end, with a MySQL database to manage employee records. The
-                                     front end was built with HTML, CSS, and Tailwind CSS, ensuring a responsive and
-                                     user-friendly interface. Rigorous testing was conducted to ensure functionality,
-                                     reliability, and optimized performance. Completed within 2 months, the system
-                                     featured real-time data management capabilities and enhanced administrative
-                                     efficiency, demonstrating proficiency in modern web development frameworks.</p>
-                                 <a href="yt.png" data-lightbox="portfolio"
-                                     data-title="Screenshot of Project 1 Dashboard">
-                                     <img src="yt.png" alt="Screenshot of Project 1 dashboard"
-                                         className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                                 </a>
-                                 <a href="https://youtu.be/DXCqWIBg2WY"
-                                     target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">Demo YT</a>
-                             </div>
-                         </div>
-                     </div>
-
-
-                  <div
-                      className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                      <div className="grid grid-cols-1 gap-4">
-                          <div
-                              className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Designed,
-                                  developed, and implemented DATABASE.
-                        CASE STUDY ON PT K3 CONCERT TICKET PURCHASES </h3>
-                      <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">designed, developed, and implemented an efficient relational
-                        database up to the third normal form (3NF) using MySQL for PT K3
-                        Concert's online ticket purchasing system. identifying and modeling entities
-                        such as users, concerts, tickets, and payments; defining their
-                        attributes; determining the relationships between these entities; and
-                        visualizing the entire structure in an Entity-Relationship Diagram
-                        (ERD) using draw.io. ensured data integrity throughout the process and
-                        completed the ERD design within 1 week, schema
-                        implementation within 2 weeks. and the system testing within 1 week</p>
-                    <a href="erd.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                        <img src="erd.png" alt="Screenshot of Project 1 dashboard"
-                            className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                    </a>
-                      <a href="https://drive.google.com/file/d/14kUsDjk4kpRtGsyVuLsoi5v0Gm4efjyX/view?usp=drive_link"
-                        target="_blank" rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Drive</a>
-                    </div>
-                    </div>
-                    </div>
-
-                   <div
-                       className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                       <div className="grid grid-cols-1 gap-4">
-                           <div
-                               className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Designed,
-                                   developed, and implemented a simple
-                        RESTful API for COVID-19 data </h3>
-                      <p className="mt-3  text-gray-700 dark:text-gray-300 text-sm leading-relaxed">Designed, developed, and implemented a simple RESTful API
-                        for COVID-19 data using the Python Flask framework. This API will support
-                        CRUD operations (GET, POST, PUT, DELETE) to manage data effectively,
-                        ensuring responsive request handling and high uptime.
-                        Document the API using Postman and complete the project within 1 week.</p>
-                     <a href="dokumentasi.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                         <img src="dokumentasi.png" alt="Screenshot of Project 1 dashboard"
-                             className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                     </a>
-                      <a href="https://documenter.getpostman.com/view/31997652/2s9YsDjuCQ" target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Postman</a>
-                    </div>
-                    </div>
-                    </div>
-
-                    <div
-                        className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                        <div className="grid grid-cols-1 gap-4">
-                            <div
-                                className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">Created and
-                                    designed the Software Requirements
-                        Specification (SRS) and Software Design Document (SDD) for an online vape
-                        shop application </h3>
-                      <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">Created and designed
-                        the Software Requirements Specification
-                        (SRS) and Software Design Document (SDD) for an online vape shop
-                        application according to the vape shop client's requirements, detailing
-                        functional requirements such as user registration and product
-                        management, as well as non-functional requirements such as performance and
-                        security. The SDD includes UML use case diagrams,
-                        activity diagrams, sequence diagrams, class diagrams, and user interface
-                        design.</p>
-                     <a href="ssr.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                         <img src="ssr.png" alt="Screenshot of Project 1 dashboard"
-                             className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                     </a>
-                      <a href="https://drive.google.com/drive/folders/1w_pEGk6E7pzgPvSV2Wf5Zpo1AvE2-Y-A?usp=drive_link"
-                        target="_blank" rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on Drive</a>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    <div
-                        className="bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:to-gray-700 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                        <div className="grid grid-cols-1 gap-4">
-                            <div
-                                className="portfolio-item relative p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-transform transform hover:-translate-y-2">
-
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4">NUMPAK:
-                                  Revolutionizing the Luxury Car Buying Experience </h3>
-                      <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">NUMPAK is a
-                        user-friendly platform that simplifies the luxury car buying process by offering a seamless
-                        experience for browsing vehicles, comparing prices, and applying for financing all in one place.
-                        Designed for first-time users, NUMPAK ensures transparency by listing actual prices, helping
-                        buyers find the best deals and make informed decisions, whether they are professionals or
-                        business owners in search of reliable vehicles.</p>
-                     <a href="figma.png" data-lightbox="portfolio" data-title="Screenshot of Project 1 Dashboard">
-                         <img src="figma.png" alt="Screenshot of Project 1 dashboard"
-                             className="mt-4 w-full h-auto rounded-lg shadow-md transition-transform transform hover:scale-110" />
-                     </a>
-                      <a href="https://www.figma.com/file/xl533mEWmeaeDuG8XvKalr/2211102074_RestuFirmansyah_IF-10B?type=design&node-id=1%3A2&mode=design&t=wweuWOFSTCvi2tVu-1"
-                        target="_blank" rel="noopener noreferrer"
-                        className="inline-block mt-4 text-blue-600 dark:text-blue-400 font-medium text-sm
-                        hover:underline">View on FIGMA</a>
-                    </div>
-                    </div>
-                    </div>
-
-                    
-                   
-
-
-
-
-
-
-
-
-
-                  </div>
-                </section>
-                
-                <section id="blog" className="my-8">
-                  <h2 className="text-2xl font-bold">Blog & Articles</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
-                      <h3 className="text-xl font-bold">Article 1</h3>
-                      <p className="mt-2">A brief description of the article.</p>
-                      <a href="#" className="text-blue-600 dark:text-blue-400 mt-2 block">Read More</a>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
-                      <h3 className="text-xl font-bold">Article 2</h3>
-                      <p className="mt-2">A brief description of the article.</p>
-                      <a href="#" className="text-blue-600 dark:text-blue-400 mt-2 block">Read More</a>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
-                      <h3 className="text-xl font-bold">Article 3</h3>
-                      <p className="mt-2">A brief description of the article.</p>
-                      <a href="#" className="text-blue-600 dark:text-blue-400 mt-2 block">Read More</a>
-                    </div>
-                  </div>
-                </section>
-
-
-
-                <div className="mt-4">
-                  <h3 className="text-xl font-bold">Certifications</h3>
-                  <div className="flex mt-4">
-                    <img src="s1.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-                    <img src="s2.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-                    <img src="s3.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-
-                  </div>
-                  <div className="flex mt-4">
-                    <img src="s4.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-                    <img src="s5.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-                    <img src="s6.png" alt="Google Data Analytics Certification"
-                      style={{ width: '400px', height: '300px' }} className="mr-2" />
-
-                  </div>
-                </div>
-                <section id="contact" className="mt-8" text-center style={{ backgroundColor: '#f7f7f7' }}>
-                  <h2 className="text-2xl font-bold">Contact</h2>
-                  <div className="mt-4 flex justify">
-
-                    <a href="https://github.com/FirmanRcode" target="_blank" rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 ml-4 flex items-center">
-                      <i className="fab fa-github mr-1"></i>My GitHub
-                    </a>
-                    <a href="https://wa.me/6282120605121" target="_blank" rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 ml-4 flex items-center">
-                      <i className="fab fa-whatsapp mr-1"></i> WhatsApp
-                    </a>
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=restufirmansyh22@gmail.com" target="_blank"
-                      rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 ml-4 flex items-center">
-                      <i className="fas fa-envelope mr-1"></i> Gmail
-                    </a>
-                    <a href="https://www.linkedin.com/in/restufirmansyah/" target="_blank" rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 ml-4 flex items-center">
-                      <i className="fab fa-linkedin mr-"></i> LinkedIn
-                    </a>
-                  </div>
-
-
-                </section>
-
-              </main>
-              <footer className="bg-blue-600 dark:bg-blue-800 text-white p-4 text-center">
-                <p>&copy; 2025 Restu Firmansyah. All rights reserved.</p>
-              </footer>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Navigation -->
+    <header class="hero-gradient text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold flex items-center">
+                <span class="mr-2"><i class="fas fa-code"></i></span>
+                <span>RestuF</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button id="theme-toggle" class="ml-4">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
             </div>
-        );
-      };
+            
+            <button id="mobile-menu-button" class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <a href="#home" class="py-2 px-4 hover:bg-blue-700 rounded">Home</a>
+            <a href="#about" class="py-2 px-4 hover:bg-blue-700 rounded">About</a>
+            <a href="#skills" class="py-2 px-4 hover:bg-blue-700 rounded">Skills</a>
+            <a href="#portfolio" class="py-2 px-4 hover:bg-blue-700 rounded">Portfolio</a>
+            <a href="#contact" class="py-2 px-4 hover:bg-blue-700 rounded">Contact</a>
+            <div class="py-2 px-4 flex justify-between items-center">
+                <span>Dark Mode</span>
+                <button id="mobile-theme-toggle">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
- 
-      // Render React App
-      ReactDOM.render(<App />, document.getElementById("root"));
-    </script>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center py-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="relative inline-block mb-8">
+                    <img src="pplinkedin.jpg" alt="Restu Firmansyah" 
+                        class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-xl mx-auto animate-float">
+                    <div class="absolute -bottom-2 -right-2 bg-primary-600 text-white p-2 rounded-full">
+                        <i class="fas fa-check text-xl"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Restu Firmansyah</h1>
+                <div class="text-xl md:text-2xl mb-6 animate-fade-in animate-delay-100">
+                    <span class="text-primary-600 dark:text-primary-400 font-medium">Data Analyst</span> | 
+                    <span class="text-primary-600 dark:text-primary-400 font-medium">Data Scientist</span> | 
+                    <span class="text-primary-600 dark:text-primary-400 font-medium">Full-Stack Developer</span>
+                </div>
+                
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-fade-in animate-delay-200">
+                    Turning data into actionable insights and building innovative solutions.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-300">
+                    <a href="https://drive.google.com/file/d/1rSTCGFPVcU6hzVhs66uzJNPtvra-JKlP/view?usp=sharing" target="_blank"
+                        class="bg-primary-600 hover:bg-primary-800 text-white px-6 py-3 rounded-lg font-medium transition-all flex items-center">
+                        <i class="fas fa-file-alt mr-2"></i> View Resume
+                    </a>
+                    <a href="#contact" class="border border-primary-600 text-primary-600 dark:text-primary-400 dark:border-primary-400 hover:bg-primary-100 dark:hover:bg-gray-800 px-6 py-3 rounded-lg font-medium transition-all flex items-center">
+                        <i class="fas fa-envelope mr-2"></i> Contact Me
+                    </a>
+                </div>
+                
+                <div class="flex justify-center mt-12 space-x-6 animate-fade-in animate-delay-400">
+                    <a href="https://www.linkedin.com/in/restufirmansyah/" target="_blank" class="text-2xl hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/FirmanRcode" target="_blank" class="text-2xl hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://wa.me/6282120605121" target="_blank" class="text-2xl hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:restufirmansyh22@gmail.com" class="text-2xl hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center relative">
+                    <span class="relative inline-block">
+                        About Me
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"></span>
+                    </span>
+                </h2>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 animate-slide-up">
+                    <p class="text-lg leading-relaxed mb-6">
+                        A sixth-semester Informatics Engineering student at Telkom University's Purwokerto campus with a GPA of 3.69. 
+                        I demonstrate strong leadership, team management, and problem-solving skills through active organizational roles. 
+                        I'm also engaged in investment and business, with a focus on capital market trends.
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed mb-6">
+                        I specialize in Back-end Engineering, Data Analysis, Data Science, and Database Management, with hands-on experience in 
+                        machine learning, data visualization, and full-stack web development. Skilled in SQL, Python, Excel, Tableau, and web 
+                        development technologies like JavaScript, React, and Node.js.
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed">
+                        I'm passionate about leveraging data-driven insights and technical expertise to create impactful solutions in technology and business.
+                    </p>
+                    
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl text-primary-600 dark:text-primary-400 mb-2">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="font-semibold">Education</h3>
+                            <p class="text-sm">Telkom University</p>
+                        </div>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl text-primary-600 dark:text-primary-400 mb-2">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="font-semibold">Experience</h3>
+                            <p class="text-sm">Multiple Projects</p>
+                        </div>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl text-primary-600 dark:text-primary-400 mb-2">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3 class="font-semibold">Projects</h3>
+                            <p class="text-sm">10+ Completed</p>
+                        </div>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl text-primary-600 dark:text-primary-400 mb-2">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3 class="font-semibold">Certifications</h3>
+                            <p class="text-sm">6+ Achieved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center relative">
+                    <span class="relative inline-block">
+                        My Skills
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"></span>
+                    </span>
+                </h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <!-- Data Analysis -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Data Analysis</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            SQL, Python, Excel, Tableau, Data Visualization, Statistical Analysis
+                        </p>
+                    </div>
+                    
+                    <!-- Data Science -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Data Science</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Machine Learning, Predictive Modeling, Data Mining, Scikit-learn, Pandas
+                        </p>
+                    </div>
+                    
+                    <!-- Backend -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Backend</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Node.js, Express.js, API Development, MySQL, Database Design
+                        </p>
+                    </div>
+                    
+                    <!-- Frontend -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Frontend</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            HTML, CSS, JavaScript, React, Tailwind CSS, Responsive Design
+                        </p>
+                    </div>
+                    
+                    <!-- UI/UX -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">UI/UX Design</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Figma, Wireframing, Prototyping, User Research, Design Systems
+                        </p>
+                    </div>
+                    
+                    <!-- Business -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                        <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Business</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Market Analysis, Investment Strategies, Financial Modeling
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Technical Skills</h3>
+                    
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=13406&format=png&color=000000" 
+                                alt="SQL" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">SQL</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=13441&format=png&color=000000" 
+                                alt="Python" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">Python</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=117561&format=png&color=000000" 
+                                alt="Excel" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">Excel</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=9Kvi1p1F0tUo&format=png&color=000000" 
+                                alt="Tableau" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">Tableau</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=108784&format=png&color=000000" 
+                                alt="JavaScript" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">JavaScript</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=123603&format=png&color=000000" 
+                                alt="React" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">React</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000" 
+                                alt="Node.js" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">Node.js</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="https://img.icons8.com/?size=100&id=PZQVBAxaueDJ&format=png&color=000000" 
+                                alt="Express.js" class="w-16 h-16 skill-icon">
+                            <span class="mt-2 text-sm">Express.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-16">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center relative">
+                    <span class="relative inline-block">
+                        My Projects
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"></span>
+                    </span>
+                </h2>
+                
+                <div class="mb-8 flex justify-center">
+                    <div class="inline-flex rounded-md shadow-sm" role="group">
+                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-l-lg bg-primary-600 text-white">
+                            All Projects
+                        </button>
+                        <button type="button" class="px-4 py-2 text-sm font-medium border-t border-b border-gray-200 dark:border-gray-600">
+                            Data Analysis
+                        </button>
+                        <button type="button" class="px-4 py-2 text-sm font-medium border-t border-b border-gray-200 dark:border-gray-600">
+                            Data Science
+                        </button>
+                        <button type="button" class="px-4 py-2 text-sm font-medium border-t border-b border-gray-200 dark:border-gray-600">
+                            Web Development
+                        </button>
+                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-r-lg border border-gray-200 dark:border-gray-600">
+                            UI/UX Design
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="p1.png" data-lightbox="portfolio" data-title="Amazon Sales Data Analysis">
+                            <img src="p1.png" alt="Amazon Sales Data Analysis" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Amazon Sales Data Analysis</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Python-based EDA of Amazon product sales data to uncover patterns and trends.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Pandas</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Matplotlib</span>
+                            </div>
+                            <a href="https://github.com/FirmanRcode/Data-Analyst_EDA-Dataset-Penjualan-Amazon-dengan-Python" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="p2.png" data-lightbox="portfolio" data-title="Music Industry Sales Analysis">
+                            <img src="p2.png" alt="Music Industry Sales Analysis" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Music Industry Sales Analysis</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Exploratory analysis of 40 years of music sales data to identify trends.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">EDA</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Data Visualization</span>
+                            </div>
+                            <a href="https://github.com/FirmanRcode/Exploratory-Data_Analysis-40-Tahun-Penjualan-Musik-EDA-pada-Dataset-.git" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="p3.png" data-lightbox="portfolio" data-title="Netflix Content Dashboard">
+                            <img src="p3.png" alt="Netflix Content Dashboard" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Netflix Content Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Interactive Tableau dashboard analyzing Netflix's content library.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Tableau</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Data Visualization</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Dashboard</span>
+                            </div>
+                            <a href="https://public.tableau.com/app/profile/restu.firmansyah/viz/EDA_DASHBOARD-Netflix/Netflix" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View on Tableau
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="ml.png" data-lightbox="portfolio" data-title="Retail Sales Prediction">
+                            <img src="ml.png" alt="Retail Sales Prediction" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Retail Sales Prediction</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Machine learning project predicting retail sales with 95% accuracy.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Scikit-learn</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">XGBoost</span>
+                            </div>
+                            <a href="https://github.com/FirmanRcode/Sales-Prediction-ML/tree/main" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="yt.png" data-lightbox="portfolio" data-title="Employee Management System">
+                            <img src="yt.png" alt="Employee Management System" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Employee Management System</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Full-stack web application for managing employee records.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Node.js</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Express</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">MySQL</span>
+                            </div>
+                            <a href="https://youtu.be/DXCqWIBg2WY" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fab fa-youtube mr-2"></i> View Demo
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="figma.png" data-lightbox="portfolio" data-title="NUMPAK - Luxury Car Platform">
+                            <img src="figma.png" alt="NUMPAK - Luxury Car Platform" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">NUMPAK - Luxury Car Platform</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                UI/UX design for a luxury car buying platform.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Figma</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">UI Design</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs">Prototyping</span>
+                            </div>
+                            <a href="https://www.figma.com/file/xl533mEWmeaeDuG8XvKalr/2211102074_RestuFirmansyah_IF-10B?type=design&node-id=1%3A2&mode=design&t=wweuWOFSTCvi2tVu-1" target="_blank"
+                                class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                <i class="fab fa-figma mr-2"></i> View on Figma
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#" class="inline-block px-6 py-3 border border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-100 dark:hover:bg-gray-800 transition-all">
+                        View All Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="py-16 bg-gray-100 dark:bg-gray-800 rounded-xl">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center relative">
+                    <span class="relative inline-block">
+                        Certifications
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"></span>
+                    </span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="s1.png" alt="Google Data Analytics Certificate" class="w-full h-48 object-contain p-4 bg-white">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Google Data Analytics</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Professional certificate in data analytics from Google.
+                            </p>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                                Issued: 2023
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="s2.png" alt="IBM Data Science Certificate" class="w-full h-48 object-contain p-4 bg-white">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">IBM Data Science</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Professional certificate in data science from IBM.
+                            </p>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                                Issued: 2023
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="s3.png" alt="Microsoft Excel Certificate" class="w-full h-48 object-contain p-4 bg-white">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Microsoft Excel Expert</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                Certification in advanced Excel for data analysis.
+                            </p>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                                Issued: 2022
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#" class="inline-block px-6 py-3 border border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-100 dark:hover:bg-gray-700 transition-all">
+                        View All Certifications
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center relative">
+                    <span class="relative inline-block">
+                        Get In Touch
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"></span>
+                    </span>
+                </h2>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                            <p class="mb-6">Feel free to reach out to me for collaborations or just to say hello!</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="text-primary-600 dark:text-primary-400 text-xl mr-4 mt-1">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Email</h4>
+                                        <a href="mailto:restufirmansyh22@gmail.com" class="text-gray-600 dark:text-gray-300 hover:underline">
+                                            restufirmansyh22@gmail.com
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary-600 dark:text-primary-400 text-xl mr-4 mt-1">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">WhatsApp</h4>
+                                        <a href="https://wa.me/6282120605121" target="_blank" class="text-gray-600 dark:text-gray-300 hover:underline">
+                                            +62 821-2060-5121
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary-600 dark:text-primary-400 text-xl mr-4 mt-1">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Location</h4>
+                                        <p class="text-gray-600 dark:text-gray-300">Purwokerto, Indonesia</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 flex space-x-4">
+                                <a href="https://www.linkedin.com/in/restufirmansyah/" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xl hover:bg-primary-600 hover:text-white transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/FirmanRcode" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xl hover:bg-primary-600 hover:text-white transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://twitter.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xl hover:bg-primary-600 hover:text-white transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <form class="space-y-4">
+                                <div>
+                                    <label for="name" class="block mb-1 font-medium">Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block mb-1 font-medium">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700">
+                                </div>
+                                
+                                <div>
+                                    <label for="message" class="block mb-1 font-medium">Message</label>
+                                    <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-800 text-white py-3 rounded-lg font-medium transition-colors">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold flex items-center">
+                        <span class="mr-2"><i class="fas fa-code"></i></span>
+                        <span>RestuF</span>
+                    </a>
+                    <p class="mt-2 text-gray-400">Turning data into insights and building innovative solutions.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#home" class="hover:text-primary-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-primary-400 transition-colors">About</a>
+                    <a href="#skills" class="hover:text-primary-400 transition-colors">Skills</a>
+                    <a href="#portfolio" class="hover:text-primary-400 transition-colors">Portfolio</a>
+                    <a href="#contact" class="hover:text-primary-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2024 Restu Firmansyah. All rights reserved.</p>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    
     <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        
+        const toggleTheme = () => {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        };
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Initialize lightbox
         lightbox.option({
             'resizeDuration': 200,
             'fadeDuration': 200,
@@ -691,15 +855,9 @@ technology and business. t</p>
             'wrapAround': true,
             'disableScrolling': true,
             'positionFromTop': 50,
-            'enableKeyboard': true // Mengaktifkan navigasi keyboard
-        })
+            'enableKeyboard': true
+        });
     </script>
-    <!-- Skrip Lightbox2 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
-    <!-- Inisialisasi Pengaturan Lightbox -->
-
-
 </body>
 
 </html>
